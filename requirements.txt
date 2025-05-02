@@ -1,0 +1,9 @@
+opencv-python
+pytesseract
+numpy
+pandas
+scikit-image
+imutils
+matplotlib
+pillow
+pytest
