@@ -29,5 +29,25 @@ def load_images_from_folder(folder_path, accepted_exts={'.jpg', '.jpeg', '.png',
 
 
 if __name__ == "__main__":
-    images = load_images_from_folder(input("Enter folder name: "))
-    print(images)
+    import matplotlib.pyplot as plt
+
+    images = load_images_from_folder(input("Enter folder name: "))[:18]
+    num_images = 18
+    cols = 3
+    rows = (num_images + cols - 1) // cols
+
+    fig, axes = plt.subplots(rows, cols, figsize=(15, 15))
+    axes = axes.flatten() if num_images > 1 else [axes]
+
+    for i, img in enumerate(images):
+        if i >= len(axes):
+            break
+
+        # OpenCV loads images in BGR, convert to RGB for display
+        rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        axes[i].imshow(rgb_img)
+        axes[i].set_title(f"Image {i+1}")
+        axes[i].axis('off')
+
+    plt.tight_layout()
+    plt.show()
